@@ -11,42 +11,46 @@
 #   1.scapy
 #   2.colorama
 #
-#          code contributed by: @nibrasmuhamed on Github
-#                       @nibras_muhamed on Instagram
+#          code contributed by: @nibrasmuhamed and @muhammednahil on Github
+#                      
 #
 #
 import scapy.all as scapy
 import argparse
 
-
-def get_args():
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "-t", dest="target",  help="Enter your gateway with subnet(for eg:192.168.1.1/24)")
-    option = parser.parse_args()
-    return option
-
-
-def scan(ip):
-    arp_req = scapy.ARP(pdst=ip)
-    broadcast = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")
-    arp_req_broadcast = broadcast/arp_req
-    answered_lst = scapy.srp(arp_req_broadcast, timeout=1, verbose=False)[0]
-    client_list = []
-
-    for packet in answered_lst:
-        client_dic = {"ip": packet[1].psrc, "mac": packet[1].hwsrc}
-        client_list.append(client_dic)
-
-    return client_list
+def main():
+    def get_args():
+        parser = argparse.ArgumentParser()
+        parser.add_argument(
+            "-t", dest="target",  help="Enter your gateway with subnet(for eg:192.168.1.1/24)")
+        option = parser.parse_args()
+        return option
 
 
-def print_all(result_list):
-    print("IP Address\t\t\tMac Adress\n---------------------------------------------------")
-    for client in result_list:
-        print(client["ip"] + "\t\t" + client["mac"])
+    def scan(ip):
+        arp_req = scapy.ARP(pdst=ip)
+        broadcast = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")
+        arp_req_broadcast = broadcast/arp_req
+        answered_lst = scapy.srp(arp_req_broadcast, timeout=1, verbose=False)[0]
+        client_list = []
+
+        for packet in answered_lst:
+            client_dic = {"ip": packet[1].psrc, "mac": packet[1].hwsrc}
+            client_list.append(client_dic)
+
+        return client_list
 
 
-option = get_args()
-scan_res = scan(option.target)
-print_all(scan_res)
+    def print_all(result_list):
+        print("IP Address\t\t\tMac Adress\n---------------------------------------------------")
+        for client in result_list:
+            print(client["ip"] + "\t\t" + client["mac"])
+
+
+    option = get_args()
+    scan_res = scan(option.target)
+    print_all(scan_res)
+
+
+if __name__ == "__main__":
+    main()
