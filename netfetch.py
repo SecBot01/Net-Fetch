@@ -1,10 +1,5 @@
 import sys
-import os
-
-# if not os.getuid() == 0:
-# 	sys.exit("Net-Fetch must be run as root(-_-)")
-
-exit_msg="shutting down(-_-)"
+from assets import netscan as scan
 
 def target_f():
 	# target_ip = raw_input("enter target ip address") 
@@ -25,5 +20,5 @@ while h_input != "exit" :
 		elif h_input== 'target':
 			target_f()
 		elif h_input == 'exit':
-			print(exit_msg)
+			print("\n\nshutting down(-_-)")
 			sys.exit(0)
