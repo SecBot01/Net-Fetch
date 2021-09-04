@@ -22,7 +22,6 @@ while user_input != "exit" :
 			target_f()
 		elif user_input == "scan":
 			scan_obj = scan.main()
-			
 		elif user_input == 'exit':
 			print("\n\nshutting down(-_-)")
 			sys.exit(0)

@@ -48,7 +48,7 @@ def main():
 
 
     
-    scan_res = scan(gateway+"/24")
+    scan_res = scan(gateway + "/24")
     print_all(scan_res)
 
 
