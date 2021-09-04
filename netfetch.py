@@ -8,17 +8,21 @@ def target_f():
 	print("3.File Interceptor")
 	print("4.Packet Sniffer")
 
-h_input=0
-while h_input != "exit" : 
+
+user_input=0
+while user_input != "exit" : 
 		print("Please type 'help' for more info")
-		h_input = raw_input(">> ")
-		if h_input=="help" : 
+		user_input = raw_input(">> ")
+		if user_input=="help" : 
 				print("help")
 				print("exit")
 				print("scan")
 				print("target")
-		elif h_input== 'target':
+		elif user_input== 'target':
 			target_f()
-		elif h_input == 'exit':
+		elif user_input == "scan":
+			scan_obj = scan.main()
+			
+		elif user_input == 'exit':
 			print("\n\nshutting down(-_-)")
 			sys.exit(0)
