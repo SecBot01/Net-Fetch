@@ -18,7 +18,8 @@
 import scapy.all as scapy
 import argparse
 
-def main():
+class netscanner:
+    
     def get_args():
         parser = argparse.ArgumentParser()
         parser.add_argument(
@@ -52,5 +53,5 @@ def main():
     print_all(scan_res)
 
 
-if __name__ == "__main__":
-    main()
+#if __name__ == "__main__":
+#   main()
