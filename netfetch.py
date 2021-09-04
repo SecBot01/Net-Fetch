@@ -1,5 +1,5 @@
 import sys
-from assets import netscan as scan
+import assets.netscan as scan
 
 def target_f():
 	# target_ip = raw_input("enter target ip address") 
