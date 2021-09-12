@@ -16,7 +16,6 @@
 #
 #
 import scapy.all as scapy
-import argparse
 import subprocess
 
 def main():
