@@ -1,5 +1,6 @@
 import sys
 import assets.netscan as scan
+import os
 
 def target_f():
 	# target_ip = raw_input("enter target ip address") 
@@ -7,7 +8,8 @@ def target_f():
 	print("2.DNS spoofer")
 	print("3.File Interceptor")
 	print("4.Packet Sniffer")
-
+if not os.geteuid() == 0:
+    sys.exit("[!] Net-fetch must be run as root.")
 
 user_input=0
 try:
