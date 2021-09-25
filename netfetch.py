@@ -10,7 +10,8 @@ def target_f():
 
 
 user_input=0
-while user_input != "exit" : 
+try:
+	while user_input != "exit" : 
 		print("Please type 'help' for more info")
 		user_input = raw_input(">> ")
 		if user_input=="help" : 
@@ -25,3 +26,7 @@ while user_input != "exit" :
 		elif user_input == 'exit':
 			print("\n\nshutting down(-_-)")
 			sys.exit(0)
+except KeyboardInterrupt:
+		print("\nYou Killed It!")
+
+	

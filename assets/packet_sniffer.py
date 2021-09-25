@@ -13,9 +13,8 @@
 # for more documentation visit my github page: github.com/nibrasmuhamed
 # pull requests, always welcome
 # code published under MIT LICENSE
-#			
-# 				code contributed by: @nibrasmuhamed on Github
-#                       @nibras_muhamed on Instagram
+#                   	code contributed by: @nibrasmuhamed and @muhammednahil on Github
+
 
 
 from __future__ import print_function
