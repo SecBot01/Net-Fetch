@@ -12,8 +12,7 @@
 # pull requests, always welcome
 # code published under MIT LICENSE
 # 		
-# 				code contributed by: @nibrasmuhamed on Github
-#                       @nibras_muhamed on Instagram
+# 				code contributed by: @nibrasmuhamed and @muhammednahil on Github
 
 
 import netfilterqueue

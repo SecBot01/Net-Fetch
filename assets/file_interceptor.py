@@ -12,6 +12,8 @@
 # requirement
 # more author and github 
 # copyright
+# 				code contributed by: @nibrasmuhamed and @muhammednahil on Github
+
 
 import netfilterqueue
 import scapy.all as scapy
