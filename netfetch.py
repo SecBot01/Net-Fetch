@@ -4,12 +4,17 @@ import os
 
 def target_f():
 	user_inside_target = 0
+	target_ip = raw_input("Target IP>>") 
+	if target_ip = "":
+		print("Please specify a target.")
+		target_f()
 	while user_inside_target != "back":
-		target_ip = raw_input("enter target ip address") 
 		print("1.Code Injector")
 		print("2.DNS spoofer")
 		print("3.File Interceptor")
 		print("4.Packet Sniffer")
+		print("Back - previous windows")
+		print("Exit")
 		user_inside_target = raw_input("what will you select >>  ")
 		if user_inside_target == "1":
 			print "in code Injector"
@@ -19,8 +24,11 @@ def target_f():
 			print "in file interceptor"
 		elif user_inside_target == "4":
 			print "in packet sniffer"
-		elif user_inside_target == 'back':
+		elif user_inside_target == "back" or "home":
 			home()
+		elif user_inside_target == "exit":
+			print("\n\nshutting down(-_-)")
+			sys.exit(0)
 		else:
 			print("This should be an invalid choice")
 
