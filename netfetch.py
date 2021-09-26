@@ -1,8 +1,12 @@
 import sys
 import assets.netscan as scan
 import os
+import threading
+import subprocess
+
 
 def target_f():
+	subprocess.call("bash -c 'echo 1 > /proc/sys/net/ipv4/ip_forward'", shell=True)
 	user_inside_target = 0
 	target_ip = raw_input("Target IP>>") 
 	if target_ip == "":
