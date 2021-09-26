@@ -3,7 +3,7 @@ import assets.netscan as scan
 import os
 import threading
 import subprocess
-import arp_spoof as arpspf
+import assets.arp_spoof as arpspf
 
 
 def target_f():
@@ -14,7 +14,8 @@ def target_f():
 	if target_ip == "":
 		print("Please specify a target.")
 		target_f()
-	start_arp = threading.Thread(target=arpspf.main, args=(target_ip,router_ip))
+	start_arp = threading.Thread(target=arpspf.arp_try, args=(target_ip,router_ip))
+	start_arp.start()
 
 	while user_inside_target != "back":
 		print("1.Code Injector")
@@ -32,8 +33,6 @@ def target_f():
 			print "in file interceptor"
 		elif user_inside_target == "4":
 			print "in packet sniffer"
-		elif user_inside_target == "back" or "home":
-			home()
 		elif user_inside_target == "exit":
 			print("\n\nshutting down(-_-)")
 			sys.exit(0)
