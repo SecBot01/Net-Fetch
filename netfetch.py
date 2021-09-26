@@ -59,8 +59,10 @@ def home():
 				scan_obj = scan.main()
 			elif user_input == 'exit':
 				print("\n\nshutting down(-_-)")
+				subprocess.call("bash -c 'echo 1 > /proc/sys/net/ipv4/ip_forward'", shell=True)
 				sys.exit(0)
 	except KeyboardInterrupt:
+			subprocess.call("bash -c 'echo 0 > /proc/sys/net/ipv4/ip_forward'", shell=True)
 			print("\nYou Killed It!")
 
 home()
