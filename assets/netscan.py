@@ -24,7 +24,7 @@ def main():
 
     # gateway = str(subprocess.call("ip route show | grep -i 'default via'| awk '{print $3 }'", shell=True))
     # gateway_ip = str((gateway+"/24"))
-    gateway_ip = raw_input("Enter your gateway ip with subnet (eg:192.168.1.1/24) \n\ntip: gateway ip can be obtained by running 'route -n' command\n\nip: ")
+    gateway_ip = raw_input("Enter your gateway ip with subnet (eg:192.168.1.1/24) \n\ntip: gateway ip can be obtained by running 'route -n' command\n\nIP >> ")
     
     def scan(ip):
         arp_req = scapy.ARP(pdst=ip)

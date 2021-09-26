@@ -5,7 +5,7 @@ import os
 def target_f():
 	user_inside_target = 0
 	target_ip = raw_input("Target IP>>") 
-	if target_ip = "":
+	if target_ip == "":
 		print("Please specify a target.")
 		target_f()
 	while user_inside_target != "back":
@@ -43,7 +43,7 @@ def home():
 	try:
 		while user_input != "exit" : 
 			print("Please type 'help' for more info")
-			user_input = raw_input(">> ")
+			user_input = raw_input("\nNet-Fetch >> ")
 			if user_input=="help" : 
 					print("help")
 					print("exit")
