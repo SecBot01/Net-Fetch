@@ -36,7 +36,9 @@ def target_f():
 		elif user_inside_target == "exit":
 			print("\n\nshutting down(-_-)")
 			sys.exit(0)
-		else:
+		elif user_inside_target == "back":
+			break
+		else:	
 			print("This should be an invalid choice")
 
 
@@ -48,21 +50,21 @@ if not os.geteuid() == 0:
 def home():
 	user_input=0
 	try:
+		print("Please type 'help' for more info")
 		while user_input != "exit" : 
-			print("Please type 'help' for more info")
 			user_input = raw_input("\nNet-Fetch >> ")
 			if user_input=="help" : 
-					print("help")
-					print("exit")
-					print("scan")
-					print("target")
+					print("help - print this message.")
+					print("exit - exit the program.")
+					print("scan - scan your network for targets.")
+					print("target - for attacking targets.")
 			elif user_input== 'target':
 				target_f()
 			elif user_input == "scan":
 				scan_obj = scan.main()
 			elif user_input == 'exit':
 				print("\n\nshutting down(-_-)")
-				subprocess.call("bash -c 'echo 1 > /proc/sys/net/ipv4/ip_forward'", shell=True)
+				subprocess.call("bash -c 'echo 0 > /proc/sys/net/ipv4/ip_forward'", shell=True)
 				sys.exit(0)
 	except KeyboardInterrupt:
 			subprocess.call("bash -c 'echo 0 > /proc/sys/net/ipv4/ip_forward'", shell=True)
