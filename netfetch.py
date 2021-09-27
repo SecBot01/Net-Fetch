@@ -15,10 +15,11 @@ def target_f():
 		print("Please specify a target.")
 		target_f()
 	start_arp = threading.Thread(target=arpspf.arp_try, args=(target_ip,router_ip))
+	start_arp.daemon = True
 	start_arp.start()
 
 	while user_inside_target != "back":
-		print("1.Code Injector")
+		print("\n1.Code Injector")
 		print("2.DNS spoofer")
 		print("3.File Interceptor")
 		print("4.Packet Sniffer")
@@ -39,7 +40,7 @@ def target_f():
 		elif user_inside_target == "back":
 			break
 		else:	
-			print("This should be an invalid choice")
+			print("\nInvalid choice")
 
 
 
