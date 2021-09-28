@@ -10,7 +10,7 @@
 # python code to sniff packets trasmitted through connected network as man in the middle
 # This code needs two dependencies: netfilterqueue and scapy which is available on python 2.7
 # You need a linux system
-# for more documentation visit my github page: github.com/nibrasmuhamed
+# for more documentation visit my github page: github.com/secbot01
 # pull requests, always welcome
 # code published under MIT LICENSE
 #                   	code contributed by: @nibrasmuhamed and @muhammednahil on Github
