@@ -34,8 +34,11 @@ def target_f():
 			print "in file interceptor"
 		elif user_inside_target == "4":
 			print "in packet sniffer"
+			os.system("xterm -geometry 100x24 -hold -e 'python assets/packet_sniffer.py' ")  
+			print("\n[+]Packet Sniffing on "+target_ip)
+			print("\n[+]'Ctrl + c' to stop.")
 		elif user_inside_target == "exit":
-			print("\n\nshutting down(-_-)")
+			print("\n\nshutting down(-_-)")	
 			sys.exit(0)
 		elif user_inside_target == "back":
 			break
