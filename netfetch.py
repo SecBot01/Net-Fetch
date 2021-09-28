@@ -5,6 +5,12 @@ import threading
 import subprocess
 import assets.arp_spoof as arpspf
 
+def exit_func():
+	subprocess.call("bash -c 'echo 0 > /proc/sys/net/ipv4/ip_forward'", shell=True)
+	os.remove("/tmp/net_fetch_arp.log")
+
+def arp_response():
+	os.system("xterm -geometry 100x24 -hold -e 'tail -f /tmp/net_fetch_arp.log'")
 
 def target_f():
 	subprocess.call("bash -c 'echo 1 > /proc/sys/net/ipv4/ip_forward'", shell=True)
@@ -17,6 +23,10 @@ def target_f():
 	start_arp = threading.Thread(target=arpspf.arp_try, args=(target_ip,router_ip))
 	start_arp.daemon = True
 	start_arp.start()
+
+	arp_response_thread = threading.Thread(target=arp_response)
+	arp_response_thread.daemon = True
+	arp_response_thread.start() 
 
 	while user_inside_target != "back":
 		print("\n1.Code Injector")
@@ -47,6 +57,7 @@ def target_f():
 
 
 
+
 if not os.geteuid() == 0:
     sys.exit("[!] Net-fetch must be run as root.")
 
@@ -68,10 +79,10 @@ def home():
 				scan_obj = scan.main()
 			elif user_input == 'exit':
 				print("\n\nshutting down(-_-)")
-				subprocess.call("bash -c 'echo 0 > /proc/sys/net/ipv4/ip_forward'", shell=True)
+				exit_func()
 				sys.exit(0)
 	except KeyboardInterrupt:
-			subprocess.call("bash -c 'echo 0 > /proc/sys/net/ipv4/ip_forward'", shell=True)
+			exit_func()
 			print("\nYou Killed It!")
 
 home()
