@@ -58,22 +58,18 @@ def target_f():
 
 
 
-if not os.geteuid() == 0:
-    sys.exit("[!] Net-fetch must be run as root.")
-
-
 def home():
-	user_input=0
+	user_input = 0
 	try:
 		print("Please type 'help' for more info")
 		while user_input != "exit" : 
 			user_input = raw_input("\nNet-Fetch >> ")
-			if user_input=="help" : 
+			if user_input == "help" : 
 					print("help - print this message.")
 					print("exit - exit the program.")
 					print("scan - scan your network for targets.")
 					print("target - for attacking targets.")
-			elif user_input== 'target':
+			elif user_input == 'target':
 				target_f()
 			elif user_input == "scan":
 				scan_obj = scan.main()
@@ -85,6 +81,9 @@ def home():
 			exit_func()
 			print("\nYou Killed It!")
 
-home()
 
-	
+
+if not os.geteuid() == 0:
+    sys.exit("[!] Net-fetch must be run as root.")
+
+home()
