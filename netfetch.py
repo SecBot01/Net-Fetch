@@ -17,7 +17,7 @@ def exit_func():
 
 def arp_response():
 	sleep(3)
-	os.system("xterm -geometry 100x24 -hold -e 'less +F /tmp/net_fetch_arp.log' 2> /dev/null")
+	os.system("xterm -geometry 100x24 -hold -e 'tail -F /tmp/net_fetch_arp.log 2> /dev/null'")
 
 def target_f():
 	subprocess.call("bash -c 'echo 1 > /proc/sys/net/ipv4/ip_forward'", shell=True)
@@ -85,6 +85,8 @@ def home():
 				print("\n\nshutting down(-_-)")
 				exit_func()
 				sys.exit(0)
+			else:
+				print("Invalid Choice")
 	except KeyboardInterrupt:
 			exit_func()
 			print("\nYou Killed It!")
