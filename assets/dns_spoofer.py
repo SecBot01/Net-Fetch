@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
-# sudo iptables -I FORWARD  -j NFQUEUE --queue-num  0
-# sudo iptables --flush
+### sudo iptables -I FORWARD  -j NFQUEUE --queue-num  0
+### sudo iptables --flush
 # sudo iptables -I OUTPUT -j NFQUEUE --queue-num 0  : to test on loal host
 # sudo iptables -I INPUT -j NFQUEUE --queue-num 0  : to test on loal host
 #
