@@ -2,23 +2,27 @@ import sys
 import assets.netscan as scan
 import os
 import threading
+from time import sleep
 import subprocess
 import assets.arp_spoof as arpspf
+import assets.dns_spoofer as dns_spoof
 
 def exit_func():
 	subprocess.call("bash -c 'echo 0 > /proc/sys/net/ipv4/ip_forward'", shell=True)
 	try:
 		os.remove("/tmp/net_fetch_arp.log")
+		os.system("iptables --flush")
 	except FileNotFoundError:
 		pass
 
 def arp_response():
-	os.system("xterm -geometry 100x24 -hold -e 'tail -f /tmp/net_fetch_arp.log'")
+	sleep(3)
+	os.system("xterm -geometry 100x24 -hold -e 'less +F /tmp/net_fetch_arp.log' 2> /dev/null")
 
 def target_f():
 	subprocess.call("bash -c 'echo 1 > /proc/sys/net/ipv4/ip_forward'", shell=True)
 	user_inside_target = 0
-	target_ip = input("Target IP>>")
+	target_ip = raw_input("Target IP>>")
 	router_ip = str(subprocess.check_output("ip route show | grep -i 'default via'| awk '{print $3 }'", shell=True))
 	if target_ip == "":
 		print("Please specify a target.")
@@ -38,18 +42,19 @@ def target_f():
 		print("4.Packet Sniffer")
 		print("Back - previous windows")
 		print("Exit")
-		user_inside_target = input("what will you select >>  ")
+		user_inside_target = raw_input("what will you select >>  ")
 		if user_inside_target == "1":
 			print ("in code Injector")
 		elif user_inside_target == "2":
 			print ("in dns spoofer")
+			dns_spoof.main()
 		elif user_inside_target == "3":
 			print ("in file interceptor")
 		elif user_inside_target == "4":
 			print ("in packet sniffer")
-			os.system("xterm -geometry 100x24 -hold -e 'python assets/packet_sniffer.py' ")  
-			print("\n[+]Packet Sniffing on "+target_ip)
+			print("\n[+]Packet Sniffing on " + target_ip)
 			print("\n[+]'Ctrl + c' to stop.")
+			os.system("xterm -geometry 100x24 -hold -e 'python assets/packet_sniffer.py' ")
 		elif user_inside_target == "exit":
 			print("\n\nshutting down(-_-)")	
 			sys.exit(0)
@@ -66,7 +71,7 @@ def home():
 	try:
 		print("Please type 'help' for more info")
 		while user_input != "exit" : 
-			user_input = input("\nNet-Fetch >> ")
+			user_input = raw_input("\nNet-Fetch >> ")
 			if user_input == "help" : 
 					print("help - print this message.")
 					print("exit - exit the program.")
