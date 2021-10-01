@@ -12,11 +12,12 @@ def exit_func():
 	try:
 		os.remove("/tmp/net_fetch_arp.log")
 		os.system("iptables --flush")
+		os.system("service apache2 stop")
 	except FileNotFoundError:
 		pass
 
 def arp_response():
-	sleep(3)
+	sleep(2)
 	os.system("xterm -geometry 100x24 -hold -e 'tail -F /tmp/net_fetch_arp.log 2> /dev/null'")
 
 def target_f():
