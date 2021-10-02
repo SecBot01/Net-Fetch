@@ -50,4 +50,4 @@ def main():
 	queue.run()
 
 if __name__ == "__main__":
-   main(packet)
+   main()

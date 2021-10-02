@@ -34,6 +34,7 @@ def get_mac(ip):
         return answered_list[0][1].hwsrc
 
 def spoof(taget_ip, spoof_ip):
+    buffer_size = 1
     target_mac = get_mac(taget_ip)
     if not target_mac:
         with open('/tmp/net_fetch_arp.log', 'w', buffer_size) as f:
@@ -51,6 +52,7 @@ def restore(destination_ip , source_ip):
 def arp_try(target_ip, router_ip):  
     try:
         packet_count = 0
+        buffer_size = 1
         while True:
             spoof(target_ip, router_ip)
             spoof(router_ip, target_ip)
