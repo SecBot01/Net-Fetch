@@ -27,7 +27,7 @@ def arp_response():
 def target_f():
 	subprocess.call("bash -c 'echo 1 > /proc/sys/net/ipv4/ip_forward'", shell=True)
 	user_inside_target = 0
-	target_ip = raw_input("Target IP>>")
+	target_ip = raw_input("Target IP>>").lower()
 	router_ip = str(subprocess.check_output("ip route show | grep -i 'default via'| awk '{print $3 }'", shell=True))
 	if target_ip == "":
 		print("Please specify a target.")
@@ -48,7 +48,7 @@ def target_f():
 		print("4.Packet Sniffer")
 		print("Back - previous windows")
 		print("Exit")
-		user_inside_target = raw_input("what will you select >>  ")
+		user_inside_target = raw_input("what will you select >>  ").lower()
 		if user_inside_target == "1":
 			print ("in code Injector")
 			code_inj.main()
@@ -90,7 +90,7 @@ def home():
 	try:
 		print("Please type 'help' for more info")
 		while user_input != "exit" : 
-			user_input = raw_input("\nNet-Fetch >> ")
+			user_input = raw_input("\nNet-Fetch >> ").lower()
 			if user_input == "help" : 
 					print("help - print this message.")
 					print("exit - exit the program.")
