@@ -7,6 +7,9 @@ import subprocess
 import assets.arp_spoof as arpspf
 import assets.dns_spoofer as dns_spoof
 import assets.code_injector as code_inj
+from assets.banner import showheader
+
+
 
 def exit_func():
 	subprocess.call("bash -c 'echo 0 > /proc/sys/net/ipv4/ip_forward'", shell=True)
@@ -14,7 +17,7 @@ def exit_func():
 		os.remove("/tmp/net_fetch_arp.log")
 		os.system("iptables --flush")
 		os.system("service apache2 stop")
-	except FileNotFoundError:
+	except:
 		pass
 
 def arp_response():
@@ -34,8 +37,9 @@ def target_f():
 	start_arp.start()
 
 	arp_response_thread = threading.Thread(target=arp_response)
-	arp_response_thread.daemon = True
+	# arp_response_thread.daemon = True
 	arp_response_thread.start() 
+
 
 	while user_inside_target != "back":
 		print("\n1.Code Injector")
@@ -48,16 +52,20 @@ def target_f():
 		if user_inside_target == "1":
 			print ("in code Injector")
 			code_inj.main()
+			# arp_thread_restart()
 		elif user_inside_target == "2":
 			print ("in dns spoofer")
 			dns_spoof.main()
+			# arp_thread_restart()
 		elif user_inside_target == "3":
 			print ("in file interceptor")
+			# arp_thread_restart()
 		elif user_inside_target == "4":
 			print ("in packet sniffer")
 			print("\n[+]Packet Sniffing on " + target_ip)
 			print("\n[+]'Ctrl + c' to stop.")
 			os.system("xterm -geometry 100x24 -hold -e 'python assets/packet_sniffer.py' ")
+			# arp_thread_restart()
 		elif user_inside_target == "exit":
 			print("\n\nshutting down(-_-)")	
 			sys.exit(0)
@@ -67,9 +75,17 @@ def target_f():
 			print("\nInvalid choice")
 
 
+# def arp_thread_restart():
+# 	if arp_response_thread.is_alive():
+# 		pass
+# 	else:
+# 		arp_response_thread = threading.Thread(target=arp_response)
+# 		arp_response_thread.daemon = True
+# 		arp_response_thread.start()
 
 
 def home():
+	print(showheader())
 	user_input = 0
 	try:
 		print("Please type 'help' for more info")
