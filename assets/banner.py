@@ -61,6 +61,12 @@ banner3 = '''
 
 '''
 
+
 def showheader():
 	headers = [banner1, banner2, banner3]
 	return random.choice(headers)
+
+def usage_warning():
+	print("\t\tthis tool is for educational and testing purpose.")
+	print("\t\tdevelopers are not responsible for any illegal uses.")
+	print("\t\t\t#RespectOthersPrivacy")

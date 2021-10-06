@@ -7,7 +7,7 @@ import subprocess
 import assets.arp_spoof as arpspf
 import assets.dns_spoofer as dns_spoof
 import assets.code_injector as code_inj
-from assets.banner import showheader
+from assets.banner import showheader, usage_warning
 
 
 
@@ -85,8 +85,9 @@ def target_f():
 
 
 def home():
-	print(showheader())
-	user_input = 0
+	print(showheader()) # showing net-fetch banners.
+	usage_warning()
+	user_input = 0    	# intialising user_input.
 	try:
 		print("Please type 'help' for more info")
 		while user_input != "exit" : 
@@ -111,8 +112,9 @@ def home():
 			print("\nYou Killed It!")
 
 
-
+# Checking for root previleges.
 if not os.geteuid() == 0:
     sys.exit("[!] You Don't have super powers to run Net-fetch.")
 
+# home is equivilant to main function.
 home()
