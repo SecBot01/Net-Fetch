@@ -113,6 +113,6 @@ def home():
 
 
 if not os.geteuid() == 0:
-    sys.exit("[!] Net-fetch must be run as root.")
+    sys.exit("[!] You Don't have super powers to run Net-fetch.")
 
 home()
