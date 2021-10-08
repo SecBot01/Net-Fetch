@@ -21,7 +21,10 @@ import os
 
 
 def main():
+	os.system("iptables --flush")
 	os.system("iptables -I FORWARD  -j NFQUEUE --queue-num  0")
+	# os.system("iptables -I OUTPUT -j NFQUEUE --queue-num 0")
+	# os.system("iptables -I INPUT -j NFQUEUE --queue-num 0")
 	pc_ip = os.system("hostname -I | awk '{print $1}'")
 	os.system('service apache2 start')
 

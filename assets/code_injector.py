@@ -23,10 +23,11 @@ import os
 
 
 def main():
-
+	
+	os.system("iptables --flush")
 	os.system("iptables -I FORWARD  -j NFQUEUE --queue-num  0")
-	os.system("iptables -I OUTPUT -j NFQUEUE --queue-num 0")
-	os.system("iptables -I INPUT -j NFQUEUE --queue-num 0")
+	# os.system("iptables -I OUTPUT -j NFQUEUE --queue-num 0")
+	# os.system("iptables -I INPUT -j NFQUEUE --queue-num 0")
 	# location = raw_input("Enter  file location: ")
 	# code = open(location,"r")
 	def set_load(packet, load):

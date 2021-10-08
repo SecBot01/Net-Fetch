@@ -7,6 +7,7 @@ import subprocess
 import assets.arp_spoof as arpspf
 import assets.dns_spoofer as dns_spoof
 import assets.code_injector as code_inj
+import assets.file_interceptor as file_re
 from assets.banner import showheader, usage_warning
 
 
@@ -59,6 +60,7 @@ def target_f():
 			# arp_thread_restart()
 		elif user_inside_target == "3":
 			print ("in file interceptor")
+			file_re.main()
 			# arp_thread_restart()
 		elif user_inside_target == "4":
 			print ("in packet sniffer")
