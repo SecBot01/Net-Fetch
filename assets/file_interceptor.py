@@ -40,7 +40,7 @@ def main():
 		if scapy.Raw in scapy_packet and scapy.TCP in scapy_packet:
 			if scapy_packet[scapy.TCP].dport == 80:
 				if ".pdf" in scapy_packet[scapy.Raw].load:
-					print("[+] exe Download request found")
+					print("[+] pdf Download request found")
 					ack_list.append(scapy_packet[scapy.TCP].ack)
 
 			elif scapy_packet[scapy.TCP].sport == 80:
