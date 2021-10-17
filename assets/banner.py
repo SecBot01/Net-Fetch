@@ -70,3 +70,4 @@ def usage_warning():
 	print("\t\tthis tool is for educational and testing purpose.")
 	print("\t\tdevelopers are not responsible for any illegal uses.")
 	print("\t\t\t#RespectOthersPrivacy")
+	print("Tip: Simply Run the command netfetch on your shell")
