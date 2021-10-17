@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import sys
 import assets.netscan as scan
 import os
