@@ -17,6 +17,7 @@
 
 import scapy.all as scapy
 import subprocess
+import os
 
 def main():
     
@@ -45,11 +46,14 @@ def main():
         for client in result_list:
             print(client["ip"] + "\t\t" + client["mac"])
 
+    user_choice = input("1)pyScanner\n2)nmap\n\nChoice:")
 
-    
-    scan_res = scan(gateway_ip)
-    print_all(scan_res)
-
+    if user_choice == 1:
+        scan_res = scan(gateway_ip)
+        print_all(scan_res)
+    elif user_choice == 2:
+        # result = subprocess.check_output(args, text)
+        os.system('sudo nmap -sn '+ gateway_ip)
 
 if __name__ == "__main__":
    main()
