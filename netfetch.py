@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 import sys
 import assets.netscan as scan
+from colorama import Back, Fore, init
 import os
 import threading
 from time import sleep
@@ -94,7 +95,7 @@ def home():
 	try:
 		print("Please type 'help' for more info")
 		while user_input != "exit" : 
-			user_input = raw_input("\nNet-Fetch >> ").lower()
+			user_input = raw_input(Fore.BLUE + "\nNet-Fetch >> ").lower()
 			if user_input == "help" : 
 					print("help - print this message.")
 					print("exit - exit the program.")
@@ -115,9 +116,12 @@ def home():
 			print("\nYou Killed It!")
 
 
+init(autoreset=True)
+warning = Fore.RED
+
 # Checking for root previleges.
 if not os.geteuid() == 0:
-    sys.exit("[!] You Don't have super powers to run Net-fetch.")
+    sys.exit(warning + "[!] You Don't have super powers to run Net-fetch.")
 
 # home is equivilant to main function.
 home()
